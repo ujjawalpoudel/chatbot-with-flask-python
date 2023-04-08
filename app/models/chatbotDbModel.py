@@ -1,12 +1,10 @@
+# * Import Python Module
 import datetime
 
-# import mongoengine_goodjson as gj
+# * Import mongoengine_goodjson as gj
 from mongoengine import Document
 from mongoengine.fields import DateTimeField, StringField, IntField, EmailField
 from mongoengine import ValidationError
-
-# Connect to MongoDB database
-# from config import db_connected
 
 
 def not_null(name):
@@ -31,7 +29,8 @@ class DefaultAttributes:
 
 
 class User(DefaultAttributes, Document):
-    name = StringField(max_length=200, required=True, validation=not_null)
+    fullname = StringField(max_length=200, required=True, validation=not_null)
     age = IntField(max_value=100, min_value=0, required=True)
-    email = EmailField(required=True)
+    email = EmailField(required=True, unique=True)
     address = StringField()
+    password = StringField(required=True)

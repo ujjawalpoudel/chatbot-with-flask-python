@@ -26,10 +26,11 @@ class UserIdModel(pydantic.BaseModel, extra=pydantic.Extra.forbid):
 
 
 class UserModel(pydantic.BaseModel, extra=pydantic.Extra.forbid):
-    name: str
+    fullname: str
     age: int
     email: str
     address: Optional[str]
+    password: str
 
     @pydantic.validator("email")
     @classmethod
