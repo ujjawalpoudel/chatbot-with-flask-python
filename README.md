@@ -1,1 +1,2 @@
-# chatbot-with-flask-python
+# PythonTermProject
+Term project for Python Programming.
