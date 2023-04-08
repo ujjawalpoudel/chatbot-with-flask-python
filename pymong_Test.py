@@ -1,7 +1,10 @@
-from mongoengine import connect, Document, StringField
+from mongoengine import connect, Document, StringField, disconnect
+
+# Disconnect the existing connection (if any)
+disconnect(alias='default')
 
 # Define the MongoDB connection
-connect(host="mongodb+srv://ujjawal:lambton@cluster0.nxdac.mongodb.net/health")
+connect(host="mongodb+srv://medadmin:hMna4RYKa0rIS9wp@medicalanalysissystem.mptbxix.mongodb.net/test")
 
 
 # Define the schema for your MongoDB document
@@ -15,6 +18,7 @@ def create_document(name, email):
     # Create a new document with the data
     document = MyDocument(name=name, email=email)
     document.save()
+    print("Document created")
 
     # Return the created document object
     return document
