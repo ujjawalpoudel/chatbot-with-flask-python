@@ -25,7 +25,10 @@ def pydantic_validation(model_name):
         def decorated_function(*args, **kwargs):
             try:
                 # Parse request data and validate it using the specified Pydantic model
-                data = json.loads(request.data)
+                if request.method == "GET":
+                    pass
+                elif request.method == "POST":
+                    data = json.loads(request.data)
                 model_name(**data)
                 return f(*args, **kwargs)
             except ValidationError as e:

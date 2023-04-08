@@ -9,7 +9,7 @@ from config import host_uri
 
 # * Initialize Flask API
 app = Flask(__name__)
-app.register_blueprint(chatbot_user_module)
+app.register_blueprint(chatbot_user_module, url_prefix="/users")
 
 
 # Define the MongoDB connection
