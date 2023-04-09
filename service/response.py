@@ -9,7 +9,7 @@ def response(status_code, body):
         code: int: HTTP status code
         body: AnyOf [JSON serializable string, dict]: Body to serialize
     """
-    response = {
+    response_body = {
         "headers": {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
@@ -18,4 +18,4 @@ def response(status_code, body):
         "body": body,
         "isBase64Encoded": False,
     }
-    return make_response(response, status_code)
+    return make_response(response_body, status_code)

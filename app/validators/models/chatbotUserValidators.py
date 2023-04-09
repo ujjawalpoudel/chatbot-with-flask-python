@@ -16,12 +16,12 @@ class UserIdModel(pydantic.BaseModel, extra=pydantic.Extra.forbid):
                 User.objects.get(id=user_id)
                 return user_id
             except User.DoesNotExist:
-                message = "Given user_id ({0}) does not exits in database.".format(
+                message = "Given userId ({0}) does not exits in database.".format(
                     user_id
                 )
                 raise ValueError(message)
         else:
-            message = "Given user_id ({0}) is not valid object user_id.".format(user_id)
+            message = "Given userId ({0}) is not valid object userId.".format(user_id)
             raise ValueError(message)
 
 

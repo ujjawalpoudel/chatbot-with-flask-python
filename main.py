@@ -5,11 +5,13 @@ from mongoengine import connect
 
 # * Import User Defined Functions
 from app.routes.chatbotCRUD import chatbot_user_module
+from app.routes.patientCRUD import patient_module
 from config import host_uri
 
 # * Initialize Flask API
 app = Flask(__name__)
 app.register_blueprint(chatbot_user_module, url_prefix="/users")
+app.register_blueprint(patient_module, url_prefix="/patient")
 
 
 # Define the MongoDB connection

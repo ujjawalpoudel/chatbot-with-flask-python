@@ -5,7 +5,8 @@ from mongoengine import DoesNotExist
 
 
 # * Import User Defined Functions
-from app.validators.chatbot.createChatbotUserValidators import UserModel
+from app.validators.models.chatbotUserValidators import UserModel
+from service.errorHandler import error_handler
 from service.pydanticDecorator import pydantic_validation
 from app.models.chatbotDbModel import User
 from service.response import response
@@ -16,8 +17,9 @@ chatbot_user_module = Blueprint("chatbot_user_module", __name__)
 
 
 # * Define API Route for Create User API
-@chatbot_user_module.route("/", methods=["POST"])
+@chatbot_user_module.route("/", methods=["POST"], endpoint="create-user")
 @pydantic_validation(UserModel)
+@error_handler
 def create_user_main():
     # * Get Data from Frontend
     data = json.loads(request.data)
@@ -33,8 +35,9 @@ def create_user_main():
 
 
 # * Design API for update user details
-@chatbot_user_module.route("/<id>", methods=["PUT"])
+@chatbot_user_module.route("/<id>", methods=["PUT"], endpoint="update-user")
 @pydantic_validation(UserModel)
+@error_handler
 def update_chatbot_user_by_id(id):
     # get the user instance with the given id
     users = User.objects(id=id)
@@ -60,7 +63,8 @@ def update_chatbot_user_by_id(id):
 
 
 # * Desing API, which read id and delete user
-@chatbot_user_module.route("/<id>", methods=["DELETE"])
+@chatbot_user_module.route("/<id>", methods=["DELETE"], endpoint="delete-user")
+@error_handler
 def delete_chatbot_user_by_id(id):
     try:
         User.objects.get(id=id).delete()
@@ -72,7 +76,8 @@ def delete_chatbot_user_by_id(id):
 
 
 # * Desing API, which reads all users from the database
-@chatbot_user_module.route("/", methods=["GET"])
+@chatbot_user_module.route("/", methods=["GET"], endpoint="get-all-users")
+@error_handler
 def get_all_chatbot_users():
     users = User.objects()
     body = {
@@ -83,7 +88,8 @@ def get_all_chatbot_users():
 
 
 # * Design API, which takes document id and returns value of that document
-@chatbot_user_module.route("/<id>", methods=["GET"])
+@chatbot_user_module.route("/<id>", methods=["GET"], endpoint="get-single-user")
+@error_handler
 def get_chatbot_user_by_id(id):
     try:
         user = User.objects.get(id=id)
