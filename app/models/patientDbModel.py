@@ -1,8 +1,7 @@
 # * Import Python Module
 import datetime
 import json
-
-# * Import mongoengine_goodjson as gj
+# import mongoengine_goodjson as gj
 
 
 from mongoengine import Document
