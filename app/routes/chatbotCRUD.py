@@ -5,7 +5,7 @@ from mongoengine import DoesNotExist
 
 
 # * Import User Defined Functions
-from app.validators.chatbot.createChatbotUserValidators import CreateUserModel
+from app.validators.chatbot.createChatbotUserValidators import UserModel
 from service.pydanticDecorator import pydantic_validation
 from app.models.chatbotDbModel import User
 from service.response import response
@@ -17,7 +17,7 @@ chatbot_user_module = Blueprint("chatbot_user_module", __name__)
 
 # * Define API Route for Create User API
 @chatbot_user_module.route("/", methods=["POST"])
-@pydantic_validation(CreateUserModel)
+@pydantic_validation(UserModel)
 def create_user_main():
     # * Get Data from Frontend
     data = json.loads(request.data)
@@ -32,26 +32,30 @@ def create_user_main():
     return response(201, body)
 
 
+# * Design API for update user details
 @chatbot_user_module.route("/<id>", methods=["PUT"])
-def update_chatbot_user_by_id():
+@pydantic_validation(UserModel)
+def update_chatbot_user_by_id(id):
     # get the user instance with the given id
-    try:
-        user = User.objects.get(id=id)
-    except DoesNotExist:
+    users = User.objects(id=id)
+
+    # Check if the user is None or not
+    if users.first() == None:
         return response(404, {"message": "User not found"})
 
     # get the update data from the request body
     data = request.get_json()
 
     # update the user instance with the new data
-    user.update(**data)
+    users.update(**data)
 
     # save the updated user instance
-    user.reload()
+    # users.reload()
 
-    body = {"data": user.to_json(), "message": "User updated successfully"}
-
-    # return the updated user instance
+    body = {
+        "data": json.loads(users.first().to_json()),
+        "message": "User updated successfully",
+    }
     return response(200, body)
 
 
@@ -59,8 +63,7 @@ def update_chatbot_user_by_id():
 @chatbot_user_module.route("/<id>", methods=["DELETE"])
 def delete_chatbot_user_by_id(id):
     try:
-        user = User.objects.get(id=id)
-        user.delete()
+        User.objects.get(id=id).delete()
         body = {"message": "User deleted successfully"}
         return response(204, body)
     except DoesNotExist:
