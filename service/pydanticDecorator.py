@@ -27,7 +27,7 @@ def pydantic_validation(model_name):
                 # Parse request data and validate it using the specified Pydantic model
                 if request.method == "GET":
                     pass
-                elif request.method == "POST":
+                elif request.method == "POST" or request.method == "PUT":
                     data = json.loads(request.data)
                 model_name(**data)
                 return f(*args, **kwargs)
