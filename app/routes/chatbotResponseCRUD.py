@@ -16,7 +16,7 @@ from app.models.chatbotResponseDbModel import ChatbotResponse
 from service.response import response
 
 # * Import Constant Variables
-from static.symptoms import POSSIBLE_SYMPTOMS_DICT_METADATA
+from static.problems import POSSIBLE_PROBLEMS_DICT_METADATA
 
 
 # * Define Blueprint for API Routes
@@ -119,12 +119,15 @@ def get_chatbot_response_by_id(id):
         body = {"message": "ChatbotResponse not found"}
         return response(404, body)
 
-# * Desing API, which return all possible symptoms
-@chatbot_response_module.route("/symptoms", methods=["GET"], endpoint="get-possible-symptoms")
+
+# * Desing API, which return all possible problems
+@chatbot_response_module.route(
+    "/problems", methods=["GET"], endpoint="get-possible-problems"
+)
 @error_handler
-def get_possible_symptoms():
+def get_possible_problems():
     body = {
-        "msg": "Successfully get all possible symptoms.",
-        "data": POSSIBLE_SYMPTOMS_DICT_METADATA,
+        "msg": "Successfully get all possible problems.",
+        "data": POSSIBLE_PROBLEMS_DICT_METADATA,
     }
     return response(200, body)

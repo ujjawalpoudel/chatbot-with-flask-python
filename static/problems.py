@@ -1,4 +1,4 @@
-POSSIBLE_SYMPTOMS_METADATA = [
+POSSIBLE_PROBLEMS_METADATA = [
     "itching",
     "skin_rash",
     "nodal_skin_eruptions",
@@ -133,7 +133,7 @@ POSSIBLE_SYMPTOMS_METADATA = [
     "yellow_crust_ooze",
 ]
 
-POSSIBLE_SYMPTOMS_DICT_METADATA = {
+POSSIBLE_PROBLEMS_DICT_METADATA = {
     "itching": "Itching",
     "skin_rash": "Skin Rash",
     "nodal_skin_eruptions": "Nodal Skin Eruptions",
