@@ -9,6 +9,7 @@ from mongoengine import DoesNotExist
 from app.validators.models.chatbotUserValidators import UserModel, UpdateUserModel
 from service.errorHandler import error_handler
 from service.pydanticDecorator import pydantic_validation
+from utils.passwordHash import hash_password
 from app.models.chatbotDbModel import User
 from service.response import response
 
@@ -24,6 +25,7 @@ chatbot_user_module = Blueprint("chatbot_user_module", __name__)
 def create_user_main():
     # * Get Data from Frontend
     data = json.loads(request.data)
+    data["password"] = hash_password(data["password"])
 
     # * Save Data in Mongodb
     user = User(**data).save()
