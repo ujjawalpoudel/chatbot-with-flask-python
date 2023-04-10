@@ -1,6 +1,5 @@
 import re
-
-# import bson
+import bson
 
 
 def email_check(email):
@@ -13,11 +12,8 @@ def email_check(email):
 
 
 def bson_id_check(id):
-    pass
-
-
-#     # * Check mongo ObjectID is valid.
-#     if bson.objectid.ObjectId.is_valid(id):
-#         return True
-#     else:
-#         return False
+    # * Check mongo ObjectID is valid.
+    if bson.objectid.ObjectId.is_valid(id):
+        return True
+    else:
+        return False
