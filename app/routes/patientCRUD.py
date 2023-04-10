@@ -1,5 +1,6 @@
 # * Import Python Module
 import json
+import datetime
 from flask import Blueprint, request
 from mongoengine import DoesNotExist
 
@@ -51,6 +52,9 @@ def update_patient_by_id(id):
 
     # update the patient instance with the new data
     patients.update(**data)
+
+    # update the modified_date field to the current date and time
+    patients.update(set__modified_date=datetime.datetime.now)
 
     body = {
         "data": json.loads(patients.first().to_json()),

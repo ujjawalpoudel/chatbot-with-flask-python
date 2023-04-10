@@ -1,5 +1,6 @@
 # * Import Python Module
 import json
+import datetime
 from flask import Blueprint, request
 from mongoengine import DoesNotExist
 
@@ -52,8 +53,8 @@ def update_chatbot_user_by_id(id):
     # update the user instance with the new data
     users.update(**data)
 
-    # save the updated user instance
-    # users.reload()
+    # update the modified_date field to the current date and time
+    users.update(set__modified_date=datetime.datetime.now)
 
     body = {
         "data": json.loads(users.first().to_json()),
