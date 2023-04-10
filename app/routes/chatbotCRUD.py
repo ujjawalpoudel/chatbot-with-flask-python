@@ -6,7 +6,7 @@ from mongoengine import DoesNotExist
 
 
 # * Import User Defined Functions
-from app.validators.models.chatbotUserValidators import UserModel
+from app.validators.models.chatbotUserValidators import UserModel, UpdateUserModel
 from service.errorHandler import error_handler
 from service.pydanticDecorator import pydantic_validation
 from app.models.chatbotDbModel import User
@@ -37,7 +37,7 @@ def create_user_main():
 
 # * Design API for update user details
 @chatbot_user_module.route("/<id>", methods=["PUT"], endpoint="update-user")
-@pydantic_validation(UserModel)
+@pydantic_validation(UpdateUserModel)
 @error_handler
 def update_chatbot_user_by_id(id):
     # get the user instance with the given id
