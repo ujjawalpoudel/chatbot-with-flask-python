@@ -51,7 +51,9 @@ python main.py
 ```
 
 3. Access the application in a web browser by navigating to `http://localhost:5000`.
- 
+
+## API Documentation
+For detailed API documentation, please refer to the [Postman Collection](https://www.postman.com/gold-robot-526148/workspace/python-term-project/collection/17813876-44ad6e56-102f-4490-aa05-4c31b83c2dfa?action=share&creator=17813876).
 
 ## Conclusion
 
