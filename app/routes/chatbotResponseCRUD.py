@@ -15,6 +15,9 @@ from service.pydanticDecorator import pydantic_validation
 from app.models.chatbotResponseDbModel import ChatbotResponse
 from service.response import response
 
+# * Import Constant Variables
+from static.symptoms import POSSIBLE_SYMPTOMS_DICT_METADATA
+
 
 # * Define Blueprint for API Routes
 chatbot_response_module = Blueprint("chatbot_response_module", __name__)
@@ -115,3 +118,13 @@ def get_chatbot_response_by_id(id):
     except DoesNotExist:
         body = {"message": "ChatbotResponse not found"}
         return response(404, body)
+
+# * Desing API, which return all possible symptoms
+@chatbot_response_module.route("/symptoms", methods=["GET"], endpoint="get-possible-symptoms")
+@error_handler
+def get_possible_symptoms():
+    body = {
+        "msg": "Successfully get all possible symptoms.",
+        "data": POSSIBLE_SYMPTOMS_DICT_METADATA,
+    }
+    return response(200, body)
