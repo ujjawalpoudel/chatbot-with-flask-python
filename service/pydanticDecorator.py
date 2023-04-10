@@ -33,7 +33,6 @@ def pydantic_validation(model_name):
                 return f(*args, **kwargs)
             except ValidationError as e:
                 # If validation fails, create an error response with the error messages
-                print("Error at pydantic_validation:- ", e)
                 errors = []
                 errors_list = json.loads(e.json())
                 for error in errors_list:

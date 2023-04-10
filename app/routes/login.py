@@ -29,8 +29,6 @@ def login():
 
         # * Get Data from Mongodb
         user = User.objects.get(email=email)
-        print(hash_password(password))
-        print(user.password)
 
         # Check if a password matches the hashed password
         if check_password(password, user.password):
