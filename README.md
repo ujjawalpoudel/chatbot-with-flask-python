@@ -11,7 +11,7 @@ Before setting up the application, ensure that you have the following requiremen
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install python package.
 
 1. Clone the repository to your local machine.
 
