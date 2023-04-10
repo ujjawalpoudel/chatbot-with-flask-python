@@ -12,10 +12,12 @@ from config import host_uri
 # * Initialize Flask API
 app = Flask(__name__)
 
+
 # * Initialize Base Flask API
-@app.route('/')
+@app.route("/")
 def hello_world():
-    return 'Hello, User!'
+    return "Hello, User!"
+
 
 app.register_blueprint(chatbot_user_module, url_prefix="/users")
 app.register_blueprint(patient_module, url_prefix="/patient")
