@@ -9,7 +9,6 @@ def print_disease(node):
     val  = node.nonzero() 
     disease = le.inverse_transform(val[0])
     return list(map(lambda x:x.strip(),list(disease)))
-
 def recurse(tree_predict, feature_name, disease_input, node=0, depth=1):
     symptoms_given = []    # list of symptoms to ask about
     symptoms_present = []  # list of symptoms already present in the diagnosis
@@ -22,21 +21,13 @@ def recurse(tree_predict, feature_name, disease_input, node=0, depth=1):
         
         # Check if the current feature is the disease we are diagnosing
         if name == disease_input:
-            val = 1
-        else:
-            val = 0
-            
-        print("val, threshold", val, threshold)
-        print (val <= threshold)
-            
-        # Determine which child node to traverse based on the feature value
-        if val <= threshold:
-            # If the feature value is less than or equal to the threshold, go left
-            return recurse(tree_predict, feature_name, disease_input, tree_predict.children_left[node], depth + 1)
-        else:
-            # If the feature value is greater than the threshold, go right
+            # If so, add the feature to the list of symptoms present in the diagnosis
             symptoms_present.append(name)
+            # Traverse the right child node to continue diagnosing
             return recurse(tree_predict, feature_name, disease_input, tree_predict.children_right[node], depth + 1)
+        else:
+            # If not, traverse the left child node to continue diagnosing
+            return recurse(tree_predict, feature_name, disease_input, tree_predict.children_left[node], depth + 1)
     else:
         # If the current node is a leaf node, we have diagnosed a disease
         present_disease = print_disease(tree_predict.value[node])
@@ -46,6 +37,7 @@ def recurse(tree_predict, feature_name, disease_input, node=0, depth=1):
     
     # Return the list of symptoms to ask about
     return list(symptoms_given)
+
 
         
         
