@@ -1,24 +1,25 @@
-# * Import Python Module
-import json
+# Standard library imports
 import datetime
+import json
+
+# Third-party imports
 from flask import Blueprint, request
 from mongoengine import DoesNotExist
 
-
-# * Import User Defined Functions
+# Local application imports
+from app.models.chatbotResponseDbModel import ChatbotResponse
 from app.validators.models.chatbotResponseValidators import (
     ChatbotResponseModel,
     CreateChatbotResponseModel,
 )
 from service.errorHandler import error_handler
-from service.pydanticDecorator import pydantic_validation
-from app.models.chatbotResponseDbModel import ChatbotResponse
-from service.response import response
-from service.machineLearning.machineLearningModel import clf, cols
-from service.machineLearning.getSymptomList import get_all_symptoms
-from service.machineLearning.makeSuggestion import make_suggestion
 from service.machineLearning.getDescription import get_description
 from service.machineLearning.getPrecaution import get_precaution
+from service.machineLearning.getSymptomList import get_all_symptoms
+from service.machineLearning.machineLearningModel import clf, cols
+from service.machineLearning.makeSuggestion import make_suggestion
+from service.pydanticDecorator import pydantic_validation
+from service.response import response
 
 
 # * Import Constant Variables

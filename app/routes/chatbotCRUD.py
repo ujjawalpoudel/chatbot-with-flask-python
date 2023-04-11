@@ -1,11 +1,12 @@
-# * Import Python Module
-from datetime import datetime
+# Standard Library Imports
 import json
+from datetime import datetime
+
+# Third-Party Imports
 from flask import Blueprint, request
 from mongoengine import DoesNotExist
 
-
-# * Import User Defined Functions
+# Local Imports
 from app.models.chatbotDbModel import User
 from app.validators.models.chatbotUserValidators import UserModel, UpdateUserModel
 from service.errorHandler import error_handler
