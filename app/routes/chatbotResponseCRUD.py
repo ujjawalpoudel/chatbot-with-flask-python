@@ -162,10 +162,9 @@ def get_list_of_symptoms(problem):
 def get_suggest_remedy():
     data = json.loads(request.data)
     disease_prediction = make_suggestion(data)
-    # print(disease_prediction)
 
     body = {
-        "msg": "Successfully get all possible symptoms.",
+        "msg": "Successfully get all possible suggestion and remedy.",
         "data": {
             "problem": disease_prediction,
             "description": get_description(disease_prediction),

@@ -2,7 +2,7 @@ import csv
 
 
 def getSeverityDict():
-    with open("MasterData/symptom_severity.csv") as csv_file:
+    with open("csv_data/symptom_severity.csv") as csv_file:
         severityDictionary = {}
 
         csv_reader = csv.reader(csv_file, delimiter=",")

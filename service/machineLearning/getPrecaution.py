@@ -4,7 +4,7 @@ import csv
 def get_precaution(disease):
     precaution_dict = {}
     try:
-        with open("MasterData/symptom_precaution.csv") as csv_file:
+        with open("csv_data/symptom_precaution.csv") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=",")
             for row in csv_reader:
                 _prec = {row[0]: [row[1], row[2], row[3], row[4]]}

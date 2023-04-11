@@ -4,7 +4,7 @@ import csv
 def get_description(disease):
     description_dict = {}
     try:
-        with open("MasterData/symptom_Description.csv") as csv_file:
+        with open("csv_data/symptom_Description.csv") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=",")
             line_count = 0
             for row in csv_reader:

@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 
 
 # Read the training data from a CSV file
-df_training = pd.read_csv("Data/Training.csv")
+df_training = pd.read_csv("csv_data/Training.csv")
 
 # Split the data into features (X) and labels (y)
 X = df_training.iloc[:, :-1]
