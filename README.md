@@ -31,11 +31,11 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install python 
   ```
 
 4. Activate the virtual environment.
-  For mac:
+  1. For mac:
   ```bash
   source chatbot_env/bin/activate
   ```
-  For windows:
+  2. For windows:
   ```bash
   chatbot_env\Scripts\activate.bat
   ```
