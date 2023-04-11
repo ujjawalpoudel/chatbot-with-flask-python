@@ -14,43 +14,56 @@ Before setting up the application, ensure that you have the following requiremen
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install python package.
 
 1. Clone the repository to your local machine.
-
-```bash
-git clone git@github.com:ujjawalpoudel/chatbot-with-flask-python.git
-```
+  ```bash
+  git clone git@github.com:ujjawalpoudel/chatbot-with-flask-python.git
+  ```
 
 2. Navigate to the project directory.
-```bash
-cd chatbot-with-flask-python  
-```
+  ```bash
+  cd chatbot-with-flask-python  
+  ```
 
 3. Create a virtual environment.
-```bash
-python3.11 -m venv chatbot_env 
-```
+  Use the version number of python installed on your computer.
+  check it using python --version
+  ```bash
+  python3.11 -m venv chatbot_env 
+  ```
 
 4. Activate the virtual environment.
-```bash
-source chatbot_env/bin/activate
-```
+
+    a. For mac:
+    ```bash
+    source chatbot_env/bin/activate
+    ```
+    b. For windows:
+    ```bash
+    chatbot_env\Scripts\activate.bat
+    ```
 
 5. Install the required Python packages.
-```bash
-pip install -r requirements.txt
-```
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 ## Running the Application
 1. Activate the virtual environment.
-```bash
-source chatbot_env/bin/activate
-```
 
-2. Start the Flask development server.
-```bash
-python main.py
-```
+    a. For mac:
+    ```bash
+    source chatbot_env/bin/activate
+    ```
+    b. For windows:
+    ```bash
+    chatbot_env\Scripts\activate.bat
+    ```
+    
+  2. Start the Flask development server.
+  ```bash
+  python main.py
+  ```
 
-3. Access the application in a web browser by navigating to `http://localhost:5000`.
+  3. Access the application in a web browser by navigating to `http://localhost:5000`.
 
 ## API Documentation
 For detailed API documentation, please refer to the [Postman Collection](https://www.postman.com/gold-robot-526148/workspace/python-term-project/collection/17813876-44ad6e56-102f-4490-aa05-4c31b83c2dfa?action=share&creator=17813876).
