@@ -14,7 +14,6 @@ from service.pydanticDecorator import pydantic_validation
 from service.response import response
 
 
-
 # * Define Blueprint for API Routes
 patient_module = Blueprint("patient_module", __name__)
 
