@@ -90,15 +90,16 @@ def delete_chatbot_user_by_id(id):
 def get_all_chatbot_users():
     # retrieve all users from the database
     users = User.objects()
-    
+
     # format the response body
     body = {
         "msg": "Successfully get all users details.",
         "data": json.loads(users.to_json()),
     }
-    
+
     # return the response
     return response(200, body)
+
 
 # Define endpoint for getting a single user by ID
 @chatbot_user_module.route("/<id>", methods=["GET"], endpoint="get-single-user")
