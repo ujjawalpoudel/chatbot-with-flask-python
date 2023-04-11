@@ -14,6 +14,12 @@ from service.errorHandler import error_handler
 from service.pydanticDecorator import pydantic_validation
 from app.models.chatbotResponseDbModel import ChatbotResponse
 from service.response import response
+from service.machineLearning.machineLearningModel import clf, cols
+from service.machineLearning.getSymptomList import get_all_symptoms
+from service.machineLearning.makeSuggestion import make_suggestion
+from service.machineLearning.getDescription import get_description
+from service.machineLearning.getPrecaution import get_precaution
+
 
 # * Import Constant Variables
 from static.problems import POSSIBLE_PROBLEMS_DICT_METADATA
@@ -129,5 +135,40 @@ def get_possible_problems():
     body = {
         "msg": "Successfully get all possible problems.",
         "data": POSSIBLE_PROBLEMS_DICT_METADATA,
+    }
+    return response(200, body)
+
+
+# * Desing API, which return all symptoms of particular problem
+@chatbot_response_module.route(
+    "/list-of-symptoms/<string:problem>", methods=["GET"], endpoint="list-of-symptoms"
+)
+@error_handler
+def get_list_of_symptoms(problem):
+    symptoms_exp = get_all_symptoms(clf, cols, problem)
+
+    body = {
+        "msg": "Successfully get all possible symptoms.",
+        "data": symptoms_exp,
+    }
+    return response(200, body)
+
+
+# * Desing API, which return all suggestion and remedy for particular problem
+@chatbot_response_module.route(
+    "/suggest-remedy", methods=["GET"], endpoint="suggest-remedy"
+)
+@error_handler
+def get_suggest_remedy():
+    data = json.loads(request.data)
+    disease_prediction = make_suggestion(data)
+
+    body = {
+        "msg": "Successfully get all possible suggestion and remedy.",
+        "data": {
+            "problem": disease_prediction,
+            "description": get_description(disease_prediction),
+            "precution_list": get_precaution(disease_prediction),
+        },
     }
     return response(200, body)
