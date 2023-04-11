@@ -131,3 +131,29 @@ def get_possible_problems():
         "data": POSSIBLE_PROBLEMS_DICT_METADATA,
     }
     return response(200, body)
+
+
+from sklearn.tree import DecisionTreeClassifier, _tree
+
+from service.machineLearning.machineLearningModel import clf, cols, reduced_data
+from service.machineLearning.getDiseaseName import disease_prediction
+
+from service.machineLearning.getSymptomList import tree_to_code
+
+from machine_learning_model import x, le,reduced_data,clf,cols
+# * Desing API, which return all symptoms of particular problem
+@chatbot_response_module.route(
+    "/list-of-symptoms/<string:problem>/<int:days>", methods=["GET"], endpoint="list-of-symptoms"
+)
+@error_handler
+def get_list_of_symptoms(problem,days):
+    symptoms_exp = tree_to_code(clf,cols, problem, days)
+    
+    print("symptoms_exp", symptoms_exp)
+
+    body = {
+        "msg": "Successfully get all possible problems.",
+        "data": symptoms_exp,
+    }
+    return response(200, body)
+
