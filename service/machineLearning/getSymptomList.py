@@ -2,7 +2,7 @@
 from sklearn.tree import _tree
 
 # * Import User Defined Function
-from machine_learning_model import le, reduced_data
+from service.machineLearning.machineLearningModel import reduced_data
 from service.machineLearning.getDiseaseName import disease_prediction
 
 

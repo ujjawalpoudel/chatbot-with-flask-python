@@ -16,6 +16,9 @@ from app.models.chatbotResponseDbModel import ChatbotResponse
 from service.response import response
 from service.machineLearning.machineLearningModel import clf, cols
 from service.machineLearning.getSymptomList import get_all_symptoms
+from service.machineLearning.makeSuggestion import make_suggestion
+from service.machineLearning.getDescription import get_description
+from service.machineLearning.getPrecaution import get_precaution
 
 
 # * Import Constant Variables
@@ -147,5 +150,26 @@ def get_list_of_symptoms(problem):
     body = {
         "msg": "Successfully get all possible symptoms.",
         "data": symptoms_exp,
+    }
+    return response(200, body)
+
+
+# * Desing API, which return all suggestion and remedy for particular problem
+@chatbot_response_module.route(
+    "/suggest-remedy", methods=["GET"], endpoint="suggest-remedy"
+)
+@error_handler
+def get_suggest_remedy():
+    data = json.loads(request.data)
+    disease_prediction = make_suggestion(data)
+    # print(disease_prediction)
+
+    body = {
+        "msg": "Successfully get all possible symptoms.",
+        "data": {
+            "problem": disease_prediction,
+            "description": get_description(disease_prediction),
+            "precution_list": get_precaution(disease_prediction),
+        },
     }
     return response(200, body)
