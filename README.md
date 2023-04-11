@@ -47,11 +47,17 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install python 
   ```
 
 ## Running the Application
-  1. Activate the virtual environment.
-  ```bash
-  source chatbot_env/bin/activate
-  ```
+1. Activate the virtual environment.
 
+    a. For mac:
+    ```bash
+    source chatbot_env/bin/activate
+    ```
+    b. For windows:
+    ```bash
+    chatbot_env\Scripts\activate.bat
+    ```
+    
   2. Start the Flask development server.
   ```bash
   python main.py
