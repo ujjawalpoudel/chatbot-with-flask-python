@@ -25,18 +25,19 @@ cd chatbot-with-flask-python
 ```
 
 3. Create a virtual environment.
-```bash
 Use the version number of python installed on your computer.
 check it using python --version
+```bash
 python3.11 -m venv chatbot_env 
 ```
 
 4. Activate the virtual environment.
-```bash
 For mac:
+```bash
 source chatbot_env/bin/activate
-
+```
 For windows:
+```bash
 chatbot_env\Scripts\activate.bat
 ```
 
