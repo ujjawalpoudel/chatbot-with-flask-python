@@ -14,6 +14,9 @@ from service.errorHandler import error_handler
 from service.pydanticDecorator import pydantic_validation
 from app.models.chatbotResponseDbModel import ChatbotResponse
 from service.response import response
+from service.machineLearning.machineLearningModel import clf, cols
+from service.machineLearning.getSymptomList import get_all_symptoms
+
 
 # * Import Constant Variables
 from static.problems import POSSIBLE_PROBLEMS_DICT_METADATA
@@ -133,16 +136,6 @@ def get_possible_problems():
     return response(200, body)
 
 
-from sklearn.tree import DecisionTreeClassifier, _tree
-
-from service.machineLearning.machineLearningModel import clf, cols, reduced_data
-from service.machineLearning.getDiseaseName import disease_prediction
-
-from service.machineLearning.getSymptomList import get_all_symptoms
-
-from machine_learning_model import x, le, reduced_data, clf, cols
-
-
 # * Desing API, which return all symptoms of particular problem
 @chatbot_response_module.route(
     "/list-of-symptoms/<string:problem>", methods=["GET"], endpoint="list-of-symptoms"
@@ -152,7 +145,7 @@ def get_list_of_symptoms(problem):
     symptoms_exp = get_all_symptoms(clf, cols, problem)
 
     body = {
-        "msg": "Successfully get all possible problems.",
+        "msg": "Successfully get all possible symptoms.",
         "data": symptoms_exp,
     }
     return response(200, body)
