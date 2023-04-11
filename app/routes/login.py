@@ -1,15 +1,16 @@
-# * Import Python Module
+# Built-in modules
 import json
+
+# Third-party modules
 from flask import Blueprint, request
 from mongoengine import DoesNotExist
 
-
-# * Import Patient Defined Functions
+# Custom modules
+from app.models.chatbotDbModel import User
 from app.validators.models.loginValidators import LoginModel
 from service.pydanticDecorator import pydantic_validation
-from app.models.chatbotDbModel import User
-from utils.passwordHash import check_password, hash_password
 from service.response import response
+from utils.passwordHash import check_password, hash_password
 
 
 # * Define Blueprint for API Routes

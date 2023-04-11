@@ -1,13 +1,11 @@
-# * Import Python Module
+# Standard Library Imports
 import datetime
-from mongoengine import Document
-from mongoengine.fields import (
-    DateTimeField,
-    StringField,
-    ReferenceField,
-)
 
-# * Import Db Model from different collection
+# Third-Party Imports
+from mongoengine import Document
+from mongoengine.fields import DateTimeField, StringField, ReferenceField
+
+# Custom modules
 from app.models.chatbotDbModel import User
 
 

@@ -1,22 +1,21 @@
-# * Import Python Module
+# Standard library imports
 import datetime
 import json
 
-# import mongoengine_goodjson as gj
-
-
-from mongoengine import Document
-from mongoengine.fields import (
+# Third-party imports
+from mongoengine import (
+    Document,
+    EmbeddedDocument,
+    EmbeddedDocumentField,
     DateTimeField,
     StringField,
     IntField,
     ReferenceField,
-    EmbeddedDocument,
-    EmbeddedDocumentField,
 )
 
-# * Import Db Model from different collection
+# Custom modules
 from app.models.chatbotDbModel import User
+
 
 GENDER = (("male", "MALE"), ("female", "FEMALE"), ("other", "OTHER"))
 

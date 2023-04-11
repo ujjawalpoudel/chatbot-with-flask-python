@@ -1,10 +1,9 @@
-# * Import Python Module
+# Standard library imports
 import datetime
 
-# * Import mongoengine_goodjson as gj
-from mongoengine import Document
+# Third-party imports
+from mongoengine import Document, ValidationError
 from mongoengine.fields import DateTimeField, StringField, IntField, EmailField
-from mongoengine import ValidationError
 
 
 def not_null(name):

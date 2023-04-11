@@ -6,7 +6,7 @@ import json
 from flask import Blueprint, request
 from mongoengine import DoesNotExist
 
-# Local application imports
+# Custom modules
 from app.models.chatbotResponseDbModel import ChatbotResponse
 from app.validators.models.chatbotResponseValidators import (
     ChatbotResponseModel,

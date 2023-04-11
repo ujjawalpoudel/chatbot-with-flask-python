@@ -1,16 +1,18 @@
-# * Import Python Module
-import json
+# Standard library imports
 import datetime
+import json
+
+# Third-party imports
 from flask import Blueprint, request
 from mongoengine import DoesNotExist
 
-
-# * Import Patient Defined Functions
-from app.validators.models.patientValidators import PatientModel
-from service.pydanticDecorator import pydantic_validation
-from service.errorHandler import error_handler
+# Custom modules
 from app.models.patientDbModel import Patient
+from app.validators.models.patientValidators import PatientModel
+from service.errorHandler import error_handler
+from service.pydanticDecorator import pydantic_validation
 from service.response import response
+
 
 
 # * Define Blueprint for API Routes

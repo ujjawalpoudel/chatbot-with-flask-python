@@ -6,7 +6,7 @@ from datetime import datetime
 from flask import Blueprint, request
 from mongoengine import DoesNotExist
 
-# Local Imports
+# Custom modules
 from app.models.chatbotDbModel import User
 from app.validators.models.chatbotUserValidators import UserModel, UpdateUserModel
 from service.errorHandler import error_handler
