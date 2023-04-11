@@ -1,36 +1,38 @@
 import re
 import pandas as pd
 from sklearn import preprocessing
-from sklearn.tree import DecisionTreeClassifier,_tree
+from sklearn.tree import DecisionTreeClassifier, _tree
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.svm import SVC
 import csv
 import warnings
+
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 from getDescription import getDescription
 from getSeverityDict import getSeverityDict
 from getprecautionDict import getprecautionDict
-from machine_learning_model import x, le,reduced_data,clf,cols
+from machine_learning_model import x, le, reduced_data, clf, cols
 
 
-severityDictionary=getSeverityDict()
+severityDictionary = getSeverityDict()
 description_list = getDescription()
-precautionDictionary=getprecautionDict()
+precautionDictionary = getprecautionDict()
 
 symptoms_dict = {}
 
 for index, symptom in enumerate(x):
-       symptoms_dict[symptom] = index
+    symptoms_dict[symptom] = index
 
-def calc_condition(exp,days):
-    sum=0
+
+def calc_condition(exp, days):
+    sum = 0
     for item in exp:
-         sum=sum+severityDictionary[item]
-    if((sum*days)/(len(exp)+1)>13):
+        sum = sum + severityDictionary[item]
+    if (sum * days) / (len(exp) + 1) > 13:
         print("You should take the consultation from doctor. ")
     else:
         print("It might not be that bad but you should take precautions.")
@@ -46,38 +48,41 @@ def calc_condition(exp,days):
 #         return 1,pred_list
 #     else:
 #         return 0,[]
-    
-    
+
+
 def sec_predict(symptoms_exp):
-    df = pd.read_csv('Data/Training.csv')
+    df = pd.read_csv("Data/Training.csv")
     X = df.iloc[:, :-1]
-    y = df['prognosis']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=20)
+    y = df["prognosis"]
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.3, random_state=20
+    )
     rf_clf = DecisionTreeClassifier()
     rf_clf.fit(X_train, y_train)
 
     symptoms_dict = {symptom: index for index, symptom in enumerate(X)}
     input_vector = np.zeros(len(symptoms_dict))
     for item in symptoms_exp:
-      input_vector[[symptoms_dict[item]]] = 1
+        input_vector[[symptoms_dict[item]]] = 1
 
     return rf_clf.predict([input_vector])
 
 
 def print_disease(node):
     node = node[0]
-    val  = node.nonzero() 
+    val = node.nonzero()
     disease = le.inverse_transform(val[0])
-    return list(map(lambda x:x.strip(),list(disease)))
+    return list(map(lambda x: x.strip(), list(disease)))
 
-def tree_to_code(tree, feature_names,disease_input, days):
+
+def tree_to_code(tree, feature_names, disease_input, days):
     tree_ = tree.tree_
     feature_name = [
         feature_names[i] if i != _tree.TREE_UNDEFINED else "undefined!"
         for i in tree_.feature
     ]
 
-    chk_dis=",".join(feature_names).split(",")
+    chk_dis = ",".join(feature_names).split(",")
     symptoms_present = []
 
     def recurse(node=0, depth=1):
@@ -90,16 +95,19 @@ def tree_to_code(tree, feature_names,disease_input, days):
                 val = 1
             else:
                 val = 0
-            if  val <= threshold:
+            if val <= threshold:
                 recurse(tree_.children_left[node], depth + 1)
             else:
                 symptoms_present.append(name)
                 recurse(tree_.children_right[node], depth + 1)
         else:
             present_disease = print_disease(tree_.value[node])
-            red_cols = reduced_data.columns 
-            symptoms_given = red_cols[reduced_data.loc[present_disease].values[0].nonzero()]
+            red_cols = reduced_data.columns
+            symptoms_given = red_cols[
+                reduced_data.loc[present_disease].values[0].nonzero()
+            ]
             print(symptoms_given)
+
     #         print("Are you experiencing any ")
     #         symptoms_exp=[]
     #         for syms in list(symptoms_given):
@@ -137,8 +145,9 @@ def tree_to_code(tree, feature_names,disease_input, days):
     #         # print("confidence level is " + str(confidence_level))
 
     recurse(0, 1)
+
+
 # getSeverityDict()
 # getprecautionDict()
 # tree_to_code(clf,cols)
-tree_to_code(clf,cols, "knee_pain",2)
-
+tree_to_code(clf, cols, "knee_pain", 2)

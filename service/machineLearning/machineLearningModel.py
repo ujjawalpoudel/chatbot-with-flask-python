@@ -38,8 +38,8 @@ clf = DecisionTreeClassifier(
 )
 clf.fit(x_train, y_train)
 
-model=SVC()
-model.fit(x_train,y_train)
+model = SVC()
+model.fit(x_train, y_train)
 
 # * Getting feature importances and indices of features in descending order
 importances = clf.feature_importances_
