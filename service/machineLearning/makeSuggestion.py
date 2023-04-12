@@ -17,7 +17,7 @@ def make_suggestion(symptoms_exp):
     """
     # * Set the values of the symptoms in the input vector
     for item in symptoms_exp:
-        input_vector[[symptoms_dict[item]]] = symptoms_exp[item]
+        input_vector[[symptoms_dict[item]]] = 1
 
     # * Predict the most likely disease using the trained decision tree classifier
     predicted_disease = clf.predict([input_vector])[0]
