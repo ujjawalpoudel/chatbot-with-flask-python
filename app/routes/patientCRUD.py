@@ -19,7 +19,7 @@ patient_module = Blueprint("patient_module", __name__)
 
 
 # * Define API Route for Create Patient API
-@patient_module.route("/", methods=["POST"], endpoint="create-pateint")
+@patient_module.route("/", methods=["POST"], endpoint="create-patient")
 @pydantic_validation(PatientModel)
 @error_handler
 def create_patient_main():
@@ -31,13 +31,13 @@ def create_patient_main():
 
     body = {
         "data": json.loads(patient.to_json()),
-        "msg": "Create Patient successfully",
+        "msg": "Patient created successfully.",
     }
     return response(201, body)
 
 
 # * Design API for update patient details
-@patient_module.route("/<id>", methods=["PUT"], endpoint="update-pateint")
+@patient_module.route("/<id>", methods=["PUT"], endpoint="update-patient")
 @pydantic_validation(PatientModel)
 @error_handler
 def update_patient_by_id(id):
@@ -46,7 +46,7 @@ def update_patient_by_id(id):
 
     # Check if the patient is None or not
     if patients.first() == None:
-        return response(404, {"message": "Patient not found"})
+        return response(404, {"message": "Patient not found."})
 
     # get the update data from the request body
     data = request.get_json()
@@ -59,26 +59,26 @@ def update_patient_by_id(id):
 
     body = {
         "data": json.loads(patients.first().to_json()),
-        "message": "Patient updated successfully",
+        "message": "Patient updated successfully.",
     }
     return response(200, body)
 
 
 # * Desing API, which read id and delete patient
-@patient_module.route("/<id>", methods=["DELETE"], endpoint="delete-pateint")
+@patient_module.route("/<id>", methods=["DELETE"], endpoint="delete-patient")
 @error_handler
 def delete_patient_by_id(id):
     try:
         Patient.objects.get(id=id).delete()
-        body = {"message": "Patient deleted successfully"}
+        body = {"message": "Patient deleted successfully."}
         return response(204, body)
     except DoesNotExist:
-        body = {"message": "Patient not found"}
+        body = {"message": "Patient not found."}
         return response(404, body)
 
 
 # * Desing API, which reads all patients from the database
-@patient_module.route("/", methods=["GET"], endpoint="get-all-pateints")
+@patient_module.route("/", methods=["GET"], endpoint="get-all-patients")
 @error_handler
 def get_all_patients():
     patients = Patient.objects()
@@ -90,7 +90,7 @@ def get_all_patients():
 
 
 # * Design API, which takes document id and returns value of that document
-@patient_module.route("/<id>", methods=["GET"], endpoint="get-single-pateint")
+@patient_module.route("/<id>", methods=["GET"], endpoint="get-single-patient")
 @error_handler
 def get_patient_by_id(id):
     try:
