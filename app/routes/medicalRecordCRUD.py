@@ -62,7 +62,9 @@ def update_medicalrecord_by_id(id):
 
 
 # * Define API, which read id and delete medical record
-@medicalrecord_module.route("/<id>", methods=["DELETE"], endpoint="delete-medicalrecord")
+@medicalrecord_module.route(
+    "/<id>", methods=["DELETE"], endpoint="delete-medicalrecord"
+)
 @error_handler
 def delete_medicalrecord_by_id(id):
     try:
@@ -87,7 +89,9 @@ def get_all_medicalrecords():
 
 
 # * Define API, which takes document id and returns value of that document
-@medicalrecord_module.route("/<id>", methods=["GET"], endpoint="get-single-medicalrecord")
+@medicalrecord_module.route(
+    "/<id>", methods=["GET"], endpoint="get-single-medicalrecord"
+)
 @error_handler
 def get_medicalrecord_by_id(id):
     try:

@@ -6,6 +6,7 @@ from datetime import datetime
 # Custom modules
 from app.models.patientDbModel import Patient
 
+
 # "MedicalRecord" model with validators
 class MedicalRecord(Document):
     bloodSugarLevel = FloatField(required=True, min_value=0, max_value=500)
@@ -24,4 +25,6 @@ class MedicalRecord(Document):
     def clean(self):
         # Check if systolic pressure is greater than diastolic pressure
         if self.systolicPressure < self.diastolicPressure:
-            raise ValidationError("Systolic pressure cannot be less than diastolic pressure")
+            raise ValidationError(
+                "Systolic pressure cannot be less than diastolic pressure"
+            )
