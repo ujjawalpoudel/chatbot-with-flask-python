@@ -25,7 +25,7 @@ def create_medicalrecord_main():
     data = json.loads(request.data)
 
     # * Save Data in Mongodb
-    medicalrecord = MedicalRecord(**data).save()
+    medicalrecord = medicalrecord(**data).save()
 
     body = {
         "data": json.loads(medicalrecord.to_json()),
@@ -39,7 +39,7 @@ def create_medicalrecord_main():
 @error_handler
 def update_medicalrecord_by_id(id):
     # get the medicalrecord instance with the given id
-    medicalrecords = MedicalRecord.objects(id=id)
+    medicalrecords = medicalrecord.objects(id=id)
 
     # Check if the medicalrecord is None or not
     if medicalrecords.first() == None:
@@ -62,13 +62,11 @@ def update_medicalrecord_by_id(id):
 
 
 # * Define API, which read id and delete medical record
-@medicalrecord_module.route(
-    "/<id>", methods=["DELETE"], endpoint="delete-medical-record"
-)
+@medicalrecord_module.route("/<id>", methods=["DELETE"], endpoint="delete-medical-record")
 @error_handler
 def delete_medicalrecord_by_id(id):
     try:
-        MedicalRecord.objects.get(id=id).delete()
+        medicalrecord.objects.get(id=id).delete()
         body = {"message": "Medical record deleted successfully."}
         return response(204, body)
     except DoesNotExist:
@@ -80,7 +78,7 @@ def delete_medicalrecord_by_id(id):
 @medicalrecord_module.route("/", methods=["GET"], endpoint="get-all-medical-records")
 @error_handler
 def get_all_medicalrecords():
-    medicalrecords = MedicalRecord.objects()
+    medicalrecords = medicalrecord.objects()
     body = {
         "msg": "Successfully get all Medical record details.",
         "data": json.loads(medicalrecords.to_json()),
@@ -89,9 +87,7 @@ def get_all_medicalrecords():
 
 
 # * Define API, which takes document id and returns value of that document
-@medicalrecord_module.route(
-    "/<id>", methods=["GET"], endpoint="get-single-medical-record"
-)
+@medicalrecord_module.route("/<id>", methods=["GET"], endpoint="get-single-medical-record")
 @error_handler
 def get_medicalrecord_by_id(id):
     try:
