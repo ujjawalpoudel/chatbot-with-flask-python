@@ -36,7 +36,7 @@ def create_patient_main():
     return response(201, body)
 
 
-# * Design API for update patient details
+# * Define API for update patient details
 @patient_module.route("/<id>", methods=["PUT"], endpoint="update-patient")
 @pydantic_validation(PatientModel)
 @error_handler
@@ -64,7 +64,7 @@ def update_patient_by_id(id):
     return response(200, body)
 
 
-# * Desing API, which read id and delete patient
+# * Define API, which read id and delete patient
 @patient_module.route("/<id>", methods=["DELETE"], endpoint="delete-patient")
 @error_handler
 def delete_patient_by_id(id):
@@ -77,7 +77,7 @@ def delete_patient_by_id(id):
         return response(404, body)
 
 
-# * Desing API, which reads all patients from the database
+# * Define API, which reads all patients from the database
 @patient_module.route("/", methods=["GET"], endpoint="get-all-patients")
 @error_handler
 def get_all_patients():
@@ -89,7 +89,7 @@ def get_all_patients():
     return response(200, body)
 
 
-# * Design API, which takes document id and returns value of that document
+# * Define API, which takes document id and returns value of that document
 @patient_module.route("/<id>", methods=["GET"], endpoint="get-single-patient")
 @error_handler
 def get_patient_by_id(id):
