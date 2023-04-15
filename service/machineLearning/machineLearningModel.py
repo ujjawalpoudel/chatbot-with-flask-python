@@ -15,13 +15,6 @@ df_training = pd.read_csv("csv_data/Training.csv")
 X = df_training.iloc[:, :-1]
 y = df_training["prognosis"]
 
-# * Separating the features and the target variable
-cols = df_training.columns
-cols = cols[:-1]
-
-# * Creating a reduced dataset with maximum values of each column for each target class
-reduced_data = df_training.groupby(df_training["prognosis"]).max()
-
 # * Converting target variable from string to numbers using LabelEncoder
 le = preprocessing.LabelEncoder()
 le.fit(y)
@@ -37,9 +30,22 @@ clf = DecisionTreeClassifier(
 )
 clf.fit(X_train, y_train)
 
+# * Separating the features and the target variable
+cols = df_training.columns
+cols = cols[:-1]
+
+# * Creating a reduced dataset with maximum values of each column for each target class
+reduced_data = df_training.groupby(df_training["prognosis"]).max()
+
 # Create a dictionary to map symptoms to their indices in the feature vector
 symptoms_dict = {symptom: index for index, symptom in enumerate(X.columns)}
 
 
 # Create an input vector for the given symptoms
 input_vector = np.zeros(len(symptoms_dict))
+
+# calculate accuracy score
+accuracy = clf.score(X_test, y_test)
+
+# print accuracy score
+print("Accuracy:", accuracy * 100)
