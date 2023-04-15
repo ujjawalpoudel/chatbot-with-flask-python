@@ -17,7 +17,7 @@ from app.models.patientDbModel import Patient
 class DefaultAttributes:
     meta = {"allow_inheritance": True}
     creation_date = DateTimeField()
-    modified_date = DateTimeField(default=datetime.datetime.now)
+    modified_date = DateTimeField(default=datetime.now)
 
     def save(self, *args, **kwargs):
         if not self.creation_date:
