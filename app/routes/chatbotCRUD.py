@@ -112,7 +112,8 @@ def get_chatbot_user_by_id(id):
         # Create response body with success message and user details
         body = {
             "msg": "Successfully get single user details.",
-            "data": json.loads(user.to_json()),
+            # "data": json.loads(user.to_json()),
+            "data": user.to_dict(),
         }
         # Return response with 200 OK status code and response body
         return response(200, body)
