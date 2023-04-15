@@ -25,7 +25,7 @@ def create_medicalrecord_main():
     data = json.loads(request.data)
 
     # * Save Data in Mongodb
-    medicalrecord = medicalrecord(**data).save()
+    medicalrecord = MedicalRecord(**data).save()
 
     body = {
         "data": json.loads(medicalrecord.to_json()),
@@ -39,7 +39,7 @@ def create_medicalrecord_main():
 @error_handler
 def update_medicalrecord_by_id(id):
     # get the medicalrecord instance with the given id
-    medicalrecords = medicalrecord.objects(id=id)
+    medicalrecords = MedicalRecord.objects(id=id)
 
     # Check if the medicalrecord is None or not
     if medicalrecords.first() == None:
@@ -66,7 +66,7 @@ def update_medicalrecord_by_id(id):
 @error_handler
 def delete_medicalrecord_by_id(id):
     try:
-        medicalrecord.objects.get(id=id).delete()
+        MedicalRecord.objects.get(id=id).delete()
         body = {"message": "Medical record deleted successfully."}
         return response(204, body)
     except DoesNotExist:
@@ -78,7 +78,7 @@ def delete_medicalrecord_by_id(id):
 @medicalrecord_module.route("/", methods=["GET"], endpoint="get-all-medical-records")
 @error_handler
 def get_all_medicalrecords():
-    medicalrecords = medicalrecord.objects()
+    medicalrecords = MedicalRecord.objects()
     body = {
         "msg": "Successfully get all Medical record details.",
         "data": json.loads(medicalrecords.to_json()),
@@ -91,7 +91,7 @@ def get_all_medicalrecords():
 @error_handler
 def get_medicalrecord_by_id(id):
     try:
-        medicalrecord = medicalrecord.objects.get(id=id)
+        medicalrecord = MedicalRecord.objects.get(id=id)
         body = {
             "msg": "Successfully get single medical record details.",
             "data": json.loads(medicalrecord.to_json()),
