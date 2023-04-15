@@ -25,7 +25,7 @@ def create_medicalrecord_main():
     data = json.loads(request.data)
 
     # * Save Data in Mongodb
-    medicalrecord = MedicalRecord(**data).save()
+    medicalrecord = medicalrecord(**data).save()
 
     body = {
         "data": json.loads(medicalrecord.to_json()),
@@ -91,7 +91,7 @@ def get_all_medicalrecords():
 @error_handler
 def get_medicalrecord_by_id(id):
     try:
-        medicalrecord = MedicalRecord.objects.get(id=id)
+        medicalrecord = medicalrecord.objects.get(id=id)
         body = {
             "msg": "Successfully get single medical record details.",
             "data": json.loads(medicalrecord.to_json()),
