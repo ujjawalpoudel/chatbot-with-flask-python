@@ -25,7 +25,7 @@ def create_medicalrecord_main():
     data = json.loads(request.data)
 
     # * Save Data in Mongodb
-    medicalrecord = medicalrecord(**data).save()
+    medicalrecord = MedicalRecord(**data).save()
 
     body = {
         "data": json.loads(medicalrecord.to_json()),

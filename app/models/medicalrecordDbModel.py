@@ -1,4 +1,4 @@
-from mongoengine import Document, FloatField, StringField, ListField, ReferenceField, DateTimeField
+from mongoengine import EmbeddedDocument, Document, EmbeddedDocumentField, FloatField, StringField, ListField, ReferenceField, DateTimeField
 from mongoengine.errors import ValidationError
 import datetime
 
@@ -21,13 +21,18 @@ class DefaultAttributes:
         self.modified_date = datetime.datetime.now()
         return super(DefaultAttributes, self).save(*args, **kwargs)
 
+class Medication(EmbeddedDocument):
+    name = StringField(required=True)
+    dosage = StringField(required=True)
+    frequency = StringField(required=True)
+    
 # "MedicalRecord" model with validators
 class MedicalRecord(Document):
     bloodSugarLevel = FloatField(min_value=0, max_value=500)
     height = FloatField(min_value=0, max_value=300)
     weight = FloatField(min_value=0, max_value=1000)
     allergies = ListField(StringField())
-    medications = ListField(StringField())
+    medications = ListField(EmbeddedDocumentField(Medication))
     systolicPressure = FloatField(min_value=0, max_value=300)
     diastolicPressure = FloatField(min_value=0, max_value=300)
     patientId = ReferenceField(Patient)
@@ -35,7 +40,8 @@ class MedicalRecord(Document):
     # Custom validation method for the "MedicalRecord" model
     def clean(self):
         # Check if systolic pressure is greater than diastolic pressure
-        if self.systolicPressure < self.diastolicPressure:
-            raise ValidationError(
-                "Systolic pressure cannot be less than diastolic pressure"
-            )
+        if(self.systolicPressure and self.diastolicPressure):
+            if self.systolicPressure < self.diastolicPressure:
+                raise ValidationError(
+                    "Systolic pressure cannot be less than diastolic pressure"
+                )
