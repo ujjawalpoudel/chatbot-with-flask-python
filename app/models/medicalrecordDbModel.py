@@ -1,10 +1,18 @@
-from mongoengine import Document, FloatField, StringField, ListField, ReferenceField, DateTimeField
+from mongoengine import (
+    Document,
+    FloatField,
+    StringField,
+    ListField,
+    ReferenceField,
+    DateTimeField,
+)
 from mongoengine.errors import ValidationError
 from datetime import datetime
 
 
 # Custom modules
 from app.models.patientDbModel import Patient
+
 
 class DefaultAttributes:
     meta = {"allow_inheritance": True}
@@ -20,6 +28,7 @@ class DefaultAttributes:
     def update(self, *args, **kwargs):
         self.modified_date = datetime.datetime.now()
         return super(DefaultAttributes, self).save(*args, **kwargs)
+
 
 # "MedicalRecord" model with validators
 class MedicalRecord(Document):
