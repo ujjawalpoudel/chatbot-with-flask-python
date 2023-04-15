@@ -33,7 +33,7 @@ def create_user_main():
 
     body = {
         "data": json.loads(user.to_json()),
-        "msg": "Create User successfully",
+        "msg": "Created User successfully.",
     }
     return response(201, body)
 
