@@ -8,6 +8,8 @@ from app.routes.chatbotCRUD import chatbot_user_module
 from app.routes.patientCRUD import patient_module
 from app.routes.login import login_module
 from app.routes.chatbotResponseCRUD import chatbot_response_module
+from app.routes.medicalRecordCRUD import medicalrecord_module
+
 from config import host_uri
 
 # * Initialize Flask API
@@ -24,6 +26,7 @@ app.register_blueprint(chatbot_user_module, url_prefix="/users")
 app.register_blueprint(patient_module, url_prefix="/patient")
 app.register_blueprint(login_module)
 app.register_blueprint(chatbot_response_module, url_prefix="/chatbot-response")
+app.register_blueprint(medicalrecord_module, url_prefix="/medical-record")
 
 # Define the MongoDB connection
 connect(

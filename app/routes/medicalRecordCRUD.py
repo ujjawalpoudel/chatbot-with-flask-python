@@ -18,7 +18,7 @@ medicalrecord_module = Blueprint("medicalrecord_module", __name__)
 
 
 # * Define API Route for Create medicalrecord API
-@medicalrecord_module.route("/", methods=["POST"], endpoint="create-medicalrecord")
+@medicalrecord_module.route("/", methods=["POST"], endpoint="create-medical-record")
 @error_handler
 def create_medicalrecord_main():
     # * Get Data from Frontend
@@ -35,7 +35,7 @@ def create_medicalrecord_main():
 
 
 # * Define API for update medicalrecord details
-@medicalrecord_module.route("/<id>", methods=["PUT"], endpoint="update-medicalrecord")
+@medicalrecord_module.route("/<id>", methods=["PUT"], endpoint="update-medical-record")
 @error_handler
 def update_medicalrecord_by_id(id):
     # get the medicalrecord instance with the given id
@@ -62,9 +62,7 @@ def update_medicalrecord_by_id(id):
 
 
 # * Define API, which read id and delete medical record
-@medicalrecord_module.route(
-    "/<id>", methods=["DELETE"], endpoint="delete-medicalrecord"
-)
+@medicalrecord_module.route("/<id>", methods=["DELETE"], endpoint="delete-medical-record")
 @error_handler
 def delete_medicalrecord_by_id(id):
     try:
@@ -77,7 +75,7 @@ def delete_medicalrecord_by_id(id):
 
 
 # * Define API, which reads all medical records from the database
-@medicalrecord_module.route("/", methods=["GET"], endpoint="get-all-medicalrecords")
+@medicalrecord_module.route("/", methods=["GET"], endpoint="get-all-medical-records")
 @error_handler
 def get_all_medicalrecords():
     medicalrecords = medicalrecord.objects()
@@ -89,9 +87,7 @@ def get_all_medicalrecords():
 
 
 # * Define API, which takes document id and returns value of that document
-@medicalrecord_module.route(
-    "/<id>", methods=["GET"], endpoint="get-single-medicalrecord"
-)
+@medicalrecord_module.route("/<id>", methods=["GET"], endpoint="get-single-medical-record")
 @error_handler
 def get_medicalrecord_by_id(id):
     try:
