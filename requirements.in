@@ -1,7 +1,7 @@
 bcrypt==4.0.1
 black==23.3.0
 certifi==2022.12.7
-flask==2.2.3
+flask==2.2.5
 mongoengine==0.27.0
 pandas==2.0.0
 pip-chill==1.0.1
